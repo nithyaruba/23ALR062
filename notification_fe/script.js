@@ -1,36 +1,76 @@
 const notifications = [
 
 {
-    type: "Placement",
-    company: "TCS Hiring",
-    dueDate: "2026-05-25",
-    message: "TCS Placement Drive Open"
+    type: "Result",
+    message: "mid-sem",
+    timestamp: "2026-04-22 17:51:30"
 },
 
 {
     type: "Placement",
-    company: "Infosys Drive",
-    dueDate: "2026-05-20",
-    message: "Infosys Hiring Open"
-},
-
-{
-    type: "Placement",
-    company: "CSX Corporation",
-    dueDate: "2026-05-10",
-    message: "CSX Corporation Hiring"
+    message: "CSX Corporation hiring",
+    timestamp: "2026-04-22 17:51:18"
 },
 
 {
     type: "Event",
-    message: "AI Workshop"
+    message: "farewell",
+    timestamp: "2026-04-22 17:51:06"
 },
 
 {
     type: "Result",
-    message: "Semester Results Published"
-}
+    message: "external",
+    timestamp: "2026-04-22 17:50:30"
+},
 
+{
+    type: "Result",
+    message: "project-review",
+    timestamp: "2026-04-22 17:50:18"
+},
+
+{
+    type: "Event",
+    message: "tech-fest",
+    timestamp: "2026-04-22 17:50:06"
+},
+
+{
+    type: "Placement",
+    message: "Advanced Micro Devices Inc. hiring",
+    timestamp: "2026-04-22 17:49:42"
+},
+
+{
+    type: "Event",
+    message: "AI Workshop",
+    timestamp: "2026-04-22 17:49:20"
+},
+
+{
+    type: "Placement",
+    message: "Infosys Drive",
+    timestamp: "2026-04-22 17:49:00"
+},
+
+{
+    type: "Result",
+    message: "semester-result",
+    timestamp: "2026-04-22 17:48:50"
+},
+
+{
+    type: "Event",
+    message: "Sports Day",
+    timestamp: "2026-04-22 17:48:30"
+},
+
+{
+    type: "Placement",
+    message: "TCS Hiring",
+    timestamp: "2026-04-22 17:48:00"
+}
 ];
 
 let filteredNotifications = [];
