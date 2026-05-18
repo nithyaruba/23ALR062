@@ -1,75 +1,34 @@
 const notifications = [
 
 {
-    type: "Result",
-    message: "mid-sem",
-    timestamp: "2026-04-22 17:51:30"
+    type: "Placement",
+    company: "TCS Hiring",
+    dueDate: "2026-05-25",
+    message: "TCS Placement Drive Open"
 },
 
 {
     type: "Placement",
-    message: "CSX Corporation hiring",
-    timestamp: "2026-04-22 17:51:18"
-},
-
-{
-    type: "Event",
-    message: "farewell",
-    timestamp: "2026-04-22 17:51:06"
-},
-
-{
-    type: "Result",
-    message: "external",
-    timestamp: "2026-04-22 17:50:30"
-},
-
-{
-    type: "Result",
-    message: "project-review",
-    timestamp: "2026-04-22 17:50:18"
-},
-
-{
-    type: "Event",
-    message: "tech-fest",
-    timestamp: "2026-04-22 17:50:06"
+    company: "Infosys Drive",
+    dueDate: "2026-05-20",
+    message: "Infosys Hiring Open"
 },
 
 {
     type: "Placement",
-    message: "Advanced Micro Devices Inc. hiring",
-    timestamp: "2026-04-22 17:49:42"
+    company: "CSX Corporation",
+    dueDate: "2026-05-10",
+    message: "CSX Corporation Hiring"
 },
 
 {
     type: "Event",
-    message: "AI Workshop",
-    timestamp: "2026-04-22 17:49:20"
-},
-
-{
-    type: "Placement",
-    message: "Infosys Drive",
-    timestamp: "2026-04-22 17:49:00"
+    message: "AI Workshop"
 },
 
 {
     type: "Result",
-    message: "semester-result",
-    timestamp: "2026-04-22 17:48:50"
-},
-
-{
-    type: "Event",
-    message: "Sports Day",
-    timestamp: "2026-04-22 17:48:30"
-},
-
-{
-    type: "Placement",
-    message: "TCS Hiring",
-    timestamp: "2026-04-22 17:48:00"
+    message: "Semester Results Published"
 }
 
 ];
@@ -80,7 +39,9 @@ const limit = 10;
 
 function filterNotifications(type){
 
-    document.getElementById("notificationContainer").innerHTML = "";
+    document.getElementById(
+        "notificationContainer"
+    ).innerHTML = "";
 
     filteredNotifications =
     notifications.filter(
@@ -95,7 +56,9 @@ function filterNotifications(type){
 function loadMore(){
 
     const container =
-    document.getElementById("notificationContainer");
+    document.getElementById(
+        "notificationContainer"
+    );
 
     for(
         let i = currentIndex;
@@ -112,22 +75,100 @@ function loadMore(){
 
         card.className = "card";
 
-        card.innerHTML = `
-            <h3>${notification.type}</h3>
-            <p>${notification.message}</p>
-            <small>${notification.timestamp}</small>
-        `;
+        // Placement section
+        if(notification.type === "Placement"){
+
+            const today =
+            new Date();
+
+            const due =
+            new Date(notification.dueDate);
+
+            const expired =
+            today > due;
+
+            const companyName =
+            expired
+            ?
+            `<strike>${notification.company}</strike>`
+            :
+            notification.company;
+
+            card.innerHTML = `
+                <h3>${companyName}</h3>
+
+                <p>${notification.message}</p>
+
+                <p>
+                    Due Date:
+                    ${notification.dueDate}
+                </p>
+
+                <button
+                id="inBtn${i}"
+                onclick="optIn(${i}, '${notification.company}')"
+                ${expired ? "disabled" : ""}>
+                Opt In
+                </button>
+
+                <button
+                id="outBtn${i}"
+                onclick="optOut(${i}, '${notification.company}')"
+                ${expired ? "disabled" : ""}>
+                Opt Out
+                </button>
+
+                ${
+                    expired
+                    ?
+                    "<p style='color:red'>Application Closed</p>"
+                    :
+                    ""
+                }
+            `;
+        }
+
+        // Event and Result
+        else{
+
+            card.innerHTML = `
+                <h3>${notification.type}</h3>
+                <p>${notification.message}</p>
+            `;
+        }
 
         container.appendChild(card);
     }
 
     currentIndex += limit;
+}
 
-    if(currentIndex >= filteredNotifications.length){
-        document.getElementById("loadBtn").style.display = "none";
-    }
+function optIn(index, company){
 
-    else{
-        document.getElementById("loadBtn").style.display = "inline-block";
-    }
+    alert(
+        "You Opted IN for " + company
+    );
+
+    document.getElementById(
+        "inBtn" + index
+    ).disabled = true;
+
+    document.getElementById(
+        "outBtn" + index
+    ).disabled = true;
+}
+
+function optOut(index, company){
+
+    alert(
+        "You Opted OUT from " + company
+    );
+
+    document.getElementById(
+        "inBtn" + index
+    ).disabled = true;
+
+    document.getElementById(
+        "outBtn" + index
+    ).disabled = true;
 }
